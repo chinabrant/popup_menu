@@ -3,4 +3,4 @@
 A Flutter PopupMenu
 
 # ScreenShot
-![screenshot01.png](https://github.com/chinabrant/popup_menu/blob/master/screenshot01.png)
+<img src="https://github.com/chinabrant/popup_menu/blob/master/screenshot01.png" width="50%" height="50%">
