@@ -24,25 +24,27 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
   PopupMenu menu;
   GlobalKey btnKey = GlobalKey();
+  GlobalKey btnKey2 = GlobalKey();
 
   @override
   void initState() {
     super.initState();
 
-    menu = PopupMenu(
-      items: [
-        // MenuItem(title: 'Copy', image: Image.asset('assets/copy.png')), 
-        // MenuItem(title: 'Home', image: Icon(Icons.home, color: Colors.white,)), 
-        // MenuItem(title: 'Mail', image: Icon(Icons.mail, color: Colors.white,)), 
-        // MenuItem(title: 'Power', image: Icon(Icons.power, color: Colors.white,)),
-        // MenuItem(title: 'Setting', image: Icon(Icons.settings, color: Colors.white,)), 
-        MenuItem(title: 'PopupMenu', image: Icon(Icons.menu, color: Colors.white,))], 
-      onClickMenu: onClickMenu, 
-      onDismiss: onDismiss);
-    
+    menu = PopupMenu(items: [
+      // MenuItem(title: 'Copy', image: Image.asset('assets/copy.png')),
+      // MenuItem(title: 'Home', image: Icon(Icons.home, color: Colors.white,)),
+      // MenuItem(title: 'Mail', image: Icon(Icons.mail, color: Colors.white,)),
+      // MenuItem(title: 'Power', image: Icon(Icons.power, color: Colors.white,)),
+      // MenuItem(title: 'Setting', image: Icon(Icons.settings, color: Colors.white,)),
+      MenuItem(
+          title: 'PopupMenu',
+          image: Icon(
+            Icons.menu,
+            color: Colors.white,
+          ))
+    ], onClickMenu: onClickMenu, onDismiss: onDismiss);
   }
 
   void onClickMenu(MenuItemProvider item) {
@@ -56,26 +58,81 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     PopupMenu.context = context;
-    
+
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
       ),
       body: Center(
-        child: MaterialButton(
-          key: btnKey,
-          onPressed: () {
-            menu.show(rect: getWidgetGlobalRect(btnKey));
-          },
-          child: Text('Show Menu'),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: <Widget>[
+            Container(
+              child: MaterialButton(
+                height: 45.0,
+                key: btnKey,
+                onPressed: () {
+                  menu.show(rect: PopupMenu.getWidgetGlobalRect(btnKey));
+                },
+                child: Text('Show Menu'),
+              ),
+            ),
+            Container(
+              child: MaterialButton(
+                key: btnKey2,
+                height: 45.0,
+                onPressed: customBackground,
+                child: Text('Show Menu'),
+              ),
+            )
+          ],
         ),
       ),
     );
   }
 
-  Rect getWidgetGlobalRect(GlobalKey key) {
-    RenderBox renderBox = key.currentContext.findRenderObject();
-    var offset =  renderBox.localToGlobal(Offset.zero);
-    return Rect.fromLTWH(offset.dx, offset.dy, renderBox.size.width, renderBox.size.height);
+  //
+  void customBackground() {
+    PopupMenu menu = PopupMenu(
+        // backgroundColor: Colors.teal,
+        // lineColor: Colors.tealAccent,
+        // maxColumn: 2,
+        items: [
+          MenuItem(title: 'Copy', image: Image.asset('assets/copy.png')),
+          MenuItem(
+              title: 'Home',
+              // textStyle: TextStyle(fontSize: 10.0, color: Colors.tealAccent),
+              image: Icon(
+                Icons.home,
+                color: Colors.white,
+              )),
+          MenuItem(
+              title: 'Mail',
+              image: Icon(
+                Icons.mail,
+                color: Colors.white,
+              )),
+          MenuItem(
+              title: 'Power',
+              image: Icon(
+                Icons.power,
+                color: Colors.white,
+              )),
+          MenuItem(
+              title: 'Setting',
+              image: Icon(
+                Icons.settings,
+                color: Colors.white,
+              )),
+          MenuItem(
+              title: 'PopupMenu',
+              image: Icon(
+                Icons.menu,
+                color: Colors.white,
+              ))
+        ],
+        onClickMenu: onClickMenu,
+        onDismiss: onDismiss);
+    menu.show(widgetKey: btnKey2);
   }
 }
