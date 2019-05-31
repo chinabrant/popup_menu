@@ -3,9 +3,7 @@
 This project was writed with pure dart code，which means it's support both iOS and Android.
 
 # ScreenShot
-<img src="https://github.com/chinabrant/popup_menu/blob/master/01.png" width="20%">
-<img src="https://github.com/chinabrant/popup_menu/blob/master/02.png" width="20%">
-<img src="https://github.com/chinabrant/popup_menu/blob/master/03.png" width="20%">
+<img src="https://github.com/chinabrant/popup_menu/blob/master/01.png" width="20%"><img src="https://github.com/chinabrant/popup_menu/blob/master/02.png" width="20%"><img src="https://github.com/chinabrant/popup_menu/blob/master/03.png" width="20%">
 
 # How To Use
 
