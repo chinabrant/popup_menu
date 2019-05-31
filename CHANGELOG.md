@@ -1,3 +1,4 @@
-## [0.0.1] - TODO: Add release date.
+## [0.0.1] - 2019.05.31
 
-* TODO: Describe initial release.
+* Custom backgroundColor
+* Custom TextStyle

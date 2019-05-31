@@ -1,7 +1,7 @@
 name: popup_menu
 description: A Flutter popup menu.
 version: 0.0.1
-author: chinabrant
+author: chinabrant <sjwu1234@gmail.com>
 homepage: https://github.com/chinabrant/popup_menu
 
 environment:
