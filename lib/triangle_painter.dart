@@ -5,14 +5,15 @@ import 'package:flutter/rendering.dart';
 class TrianglePainter extends CustomPainter {
 
   bool isDown;
+  Color color;
 
-  TrianglePainter({this.isDown = true});
+  TrianglePainter({this.isDown = true, this.color});
 
   @override
   void paint(Canvas canvas, Size size) {
     Paint _paint = new Paint();
     _paint.strokeWidth = 2.0;
-    _paint.color = Color(0xff232323);
+    _paint.color = color;
     _paint.style = PaintingStyle.fill;
 
     Path path = new Path();
