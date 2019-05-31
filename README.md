@@ -1,13 +1,14 @@
 <img src="popupmenu.png" >
 
-# popup_menu
-
 This project was writed with pure dart code，which means it's support both iOS and Android.
 
 # ScreenShot
 <img src="https://github.com/chinabrant/popup_menu/blob/master/screenshot01.png" width="30%" height="30%">
+![](01.png) ![](02.png) ![](03.png)
 
 # How To Use
+
+
 You can find the demo at the 'example' folder.
 
 First, you should set the context at somewhere in you code. Like below:
