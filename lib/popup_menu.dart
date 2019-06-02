@@ -8,10 +8,10 @@ import 'package:flutter/material.dart';
 import 'triangle_painter.dart';
 
 abstract class MenuItemProvider {
-  String get menu_title;
+  String get menuTitle;
   // Image get menu_image;
-  Widget get menu_image;
-  TextStyle get menu_textStyle;
+  Widget get menuImage;
+  TextStyle get menuTextStyle;
 }
 
 class MenuItem extends MenuItemProvider {
@@ -23,13 +23,13 @@ class MenuItem extends MenuItemProvider {
   MenuItem({this.title, this.image, this.userInfo, this.textStyle});
 
   @override
-  Widget get menu_image => image;
+  Widget get menuImage => image;
 
   @override
-  String get menu_title => title;
+  String get menuTitle => title;
 
   @override
-  TextStyle get menu_textStyle =>
+  TextStyle get menuTextStyle =>
       textStyle ?? TextStyle(color: Color(0xffc5c5c5), fontSize: 10.0);
 }
 
@@ -378,7 +378,7 @@ class _MenuItemWidgetState extends State<_MenuItemWidget> {
   }
 
   Widget _createContent() {
-    if (widget.item.menu_image != null) {
+    if (widget.item.menuImage != null) {
       // image and text
       return Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -386,15 +386,15 @@ class _MenuItemWidgetState extends State<_MenuItemWidget> {
           Container(
             width: 30.0,
             height: 30.0,
-            child: widget.item.menu_image,
+            child: widget.item.menuImage,
           ),
           Container(
             height: 22.0,
             child: Material(
               color: Colors.transparent,
               child: Text(
-                widget.item.menu_title,
-                style: widget.item.menu_textStyle,
+                widget.item.menuTitle,
+                style: widget.item.menuTextStyle,
               ),
             ),
           )
@@ -408,7 +408,7 @@ class _MenuItemWidgetState extends State<_MenuItemWidget> {
             color: Colors.transparent,
             child: Text(
               widget.item.title,
-              style: widget.item.menu_textStyle,
+              style: widget.item.menuTextStyle,
             ),
           ),
         ),

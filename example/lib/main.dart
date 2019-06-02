@@ -48,7 +48,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void onClickMenu(MenuItemProvider item) {
-    print('Click menu -> ${item.menu_title}');
+    print('Click menu -> ${item.menuTitle}');
   }
 
   void onDismiss() {
