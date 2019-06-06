@@ -9,7 +9,6 @@ import 'triangle_painter.dart';
 
 abstract class MenuItemProvider {
   String get menuTitle;
-  // Image get menu_image;
   Widget get menuImage;
   TextStyle get menuTextStyle;
 }
@@ -37,9 +36,6 @@ enum MenuType { big, oneLine }
 
 typedef MenuClickCallback = Function(MenuItemProvider item);
 
-/**
- * popup menu
- */
 class PopupMenu {
   static var itemWidth = 72.0;
   static var itemHeight = 65.0;
