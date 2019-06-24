@@ -234,7 +234,7 @@ class PopupMenu {
     int itemCount = items.length;
 
     if (_calculateColCount() == 1) {
-      return 1;
+      return itemCount;
     }
 
     int row = (itemCount - 1) ~/ _calculateColCount() + 1;
@@ -250,6 +250,9 @@ class PopupMenu {
     }
 
     int itemCount = items.length;
+    if (_maxColumn != 4 && _maxColumn > 0) {
+      return _maxColumn;
+    }
 
     if (itemCount == 4) {
       // 4个显示成两行

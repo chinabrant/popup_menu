@@ -35,16 +35,16 @@ class _MyHomePageState extends State<MyHomePage> {
     menu = PopupMenu(items: [
       // MenuItem(title: 'Copy', image: Image.asset('assets/copy.png')),
       // MenuItem(title: 'Home', image: Icon(Icons.home, color: Colors.white,)),
-      // MenuItem(title: 'Mail', image: Icon(Icons.mail, color: Colors.white,)),
-      // MenuItem(title: 'Power', image: Icon(Icons.power, color: Colors.white,)),
-      // MenuItem(title: 'Setting', image: Icon(Icons.settings, color: Colors.white,)),
+      MenuItem(title: 'Mail', image: Icon(Icons.mail, color: Colors.white,)),
+      MenuItem(title: 'Power', image: Icon(Icons.power, color: Colors.white,)),
+      MenuItem(title: 'Setting', image: Icon(Icons.settings, color: Colors.white,)),
       MenuItem(
           title: 'PopupMenu',
           image: Icon(
             Icons.menu,
             color: Colors.white,
           ))
-    ], onClickMenu: onClickMenu, onDismiss: onDismiss);
+    ], onClickMenu: onClickMenu, onDismiss: onDismiss, maxColumn: 1);
   }
 
   void onClickMenu(MenuItemProvider item) {
@@ -71,9 +71,7 @@ class _MyHomePageState extends State<MyHomePage> {
               child: MaterialButton(
                 height: 45.0,
                 key: btnKey,
-                onPressed: () {
-                  menu.show(rect: PopupMenu.getWidgetGlobalRect(btnKey));
-                },
+                onPressed: maxColumn,
                 child: Text('Show Menu'),
               ),
             ),
@@ -89,6 +87,50 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
     );
+  }
+
+  void maxColumn() {
+    PopupMenu menu = PopupMenu(
+        // backgroundColor: Colors.teal,
+        // lineColor: Colors.tealAccent,
+        maxColumn: 3,
+        items: [
+          MenuItem(title: 'Copy', image: Image.asset('assets/copy.png')),
+          // MenuItem(
+          //     title: 'Home',
+          //     // textStyle: TextStyle(fontSize: 10.0, color: Colors.tealAccent),
+          //     image: Icon(
+          //       Icons.home,
+          //       color: Colors.white,
+          //     )),
+          // MenuItem(
+          //     title: 'Mail',
+          //     image: Icon(
+          //       Icons.mail,
+          //       color: Colors.white,
+          //     )),
+          MenuItem(
+              title: 'Power',
+              image: Icon(
+                Icons.power,
+                color: Colors.white,
+              )),
+          MenuItem(
+              title: 'Setting',
+              image: Icon(
+                Icons.settings,
+                color: Colors.white,
+              )),
+          MenuItem(
+              title: 'PopupMenu',
+              image: Icon(
+                Icons.menu,
+                color: Colors.white,
+              ))
+        ],
+        onClickMenu: onClickMenu,
+        onDismiss: onDismiss);
+    menu.show(widgetKey: btnKey);
   }
 
   //
