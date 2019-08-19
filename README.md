@@ -26,23 +26,28 @@ PopupMenu menu = PopupMenu(
         MenuItem(title: 'Setting', image: Icon(Icons.settings, color: Colors.white,)), 
         MenuItem(title: 'Traffic', image: Icon(Icons.traffic, color: Colors.white,))], 
       onClickMenu: onClickMenu, 
+      stateChanged: stateChanged,
       onDismiss: onDismiss);
 
 menu.show(rect: rect);
+
+void stateChanged(bool isShow) {
+  print('menu is ${ isShow ? 'showing': 'closed' }');
+}
 ```
 
 or
 
 ```dart
 PopupMenu menu = PopupMenu(
-        // backgroundColor: Colors.teal,
-        // lineColor: Colors.tealAccent,
-        // maxColumn: 2,
+        backgroundColor: Colors.teal,
+        lineColor: Colors.tealAccent,
+        maxColumn: 3,
         items: [
           MenuItem(title: 'Copy', image: Image.asset('assets/copy.png')),
           MenuItem(
               title: 'Home',
-              // textStyle: TextStyle(fontSize: 10.0, color: Colors.tealAccent),
+              textStyle: TextStyle(fontSize: 10.0, color: Colors.tealAccent),
               image: Icon(
                 Icons.home,
                 color: Colors.white,
