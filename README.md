@@ -1,6 +1,6 @@
 <img src="popupmenu.png" >
 
-[![pub package](https://img.shields.io/badge/pub-v1.0.1-blue.svg)](https://pub.dev/packages/popup_menu)
+[![pub package](https://img.shields.io/badge/pub-v1.0.2-blue.svg)](https://pub.dev/packages/popup_menu)
 
 This project was writed with pure dart code，which means it's support both iOS and Android.
 
