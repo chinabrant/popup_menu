@@ -47,17 +47,22 @@ class _MyHomePageState extends State<MyHomePage> {
     ], onClickMenu: onClickMenu, onDismiss: onDismiss, maxColumn: 1);
   }
 
+  void stateChanged(bool isShow) {
+    print('menu is ${ isShow ? 'showing': 'closed' }');
+  }
+
   void onClickMenu(MenuItemProvider item) {
     print('Click menu -> ${item.menuTitle}');
   }
 
   void onDismiss() {
-    print('Menu is closed');
+    print('Menu is dismiss');
   }
 
   @override
   Widget build(BuildContext context) {
     PopupMenu.context = context;
+    
 
     return Scaffold(
       appBar: AppBar(
@@ -87,6 +92,12 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
     );
+  }
+
+  void checkState(BuildContext context) {
+    final snackBar = new SnackBar(content: new Text('这是一个SnackBar!'));
+
+    Scaffold.of(context).showSnackBar(snackBar);
   }
 
   void maxColumn() {
@@ -129,6 +140,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ))
         ],
         onClickMenu: onClickMenu,
+        stateChanged: stateChanged,
         onDismiss: onDismiss);
     menu.show(widgetKey: btnKey);
   }
@@ -174,6 +186,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ))
         ],
         onClickMenu: onClickMenu,
+        stateChanged: stateChanged,
         onDismiss: onDismiss);
     menu.show(widgetKey: btnKey2);
   }

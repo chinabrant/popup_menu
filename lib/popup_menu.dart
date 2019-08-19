@@ -35,6 +35,7 @@ class MenuItem extends MenuItemProvider {
 enum MenuType { big, oneLine }
 
 typedef MenuClickCallback = Function(MenuItemProvider item);
+typedef PopupMenuStateChanged = Function(bool isShow);
 
 class PopupMenu {
   static var itemWidth = 72.0;
@@ -48,6 +49,7 @@ class PopupMenu {
   Offset _offset;
   VoidCallback dismissCallback;
   MenuClickCallback onClickMenu;
+  PopupMenuStateChanged stateChanged;
   Rect _showRect; // 显示在哪个view的rect
   bool _isDown = true; // 是显示在下方还是上方，通过计算得到
   static BuildContext context;
@@ -57,6 +59,9 @@ class PopupMenu {
   Color _highlightColor;
   Color _lineColor;
 
+  bool _isShow = false;
+  bool get isShow => _isShow; // It's showing or not.
+
   PopupMenu(
       {MenuClickCallback onClickMenu,
       BuildContext context,
@@ -65,9 +70,11 @@ class PopupMenu {
       Color backgroundColor,
       Color highlightColor,
       Color lineColor,
+      PopupMenuStateChanged stateChanged,
       List<MenuItem> items}) {
     this.onClickMenu = onClickMenu;
     this.dismissCallback = onDismiss;
+    this.stateChanged = stateChanged;
     this.items = items;
     this._maxColumn = maxColumn ?? 4;
     this._backgroundColor = backgroundColor ?? Color(0xff232323);
@@ -94,7 +101,12 @@ class PopupMenu {
       return buildPopupMenuLayout(_offset);
     });
 
+    
     Overlay.of(PopupMenu.context).insert(_entry);
+    _isShow = true;
+    if (this.stateChanged != null) {
+      this.stateChanged(true);
+    }
   }
 
   static Rect getWidgetGlobalRect(GlobalKey key) {
@@ -301,8 +313,13 @@ class PopupMenu {
 
   void dismiss() {
     _entry.remove();
+    _isShow = false;
     if (dismissCallback != null) {
       dismissCallback();
+    }
+
+    if (this.stateChanged != null) {
+      this.stateChanged(false);
     }
   }
 }
