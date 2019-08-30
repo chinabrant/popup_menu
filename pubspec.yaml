@@ -1,6 +1,6 @@
 name: popup_menu
 description: A Flutter popup menu.Writted with pure dart, supported both iOS and Android.
-version: 1.0.2
+version: 1.0.3
 author: chinabrant <sjwu1234@gmail.com>
 homepage: https://github.com/chinabrant/popup_menu
 

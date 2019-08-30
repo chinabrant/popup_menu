@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:popup_menu/popup_menu.dart';
+import 'package:popup_menu_example/gesture_demo.dart';
 
 void main() => runApp(MyApp());
 
@@ -35,9 +36,24 @@ class _MyHomePageState extends State<MyHomePage> {
     menu = PopupMenu(items: [
       // MenuItem(title: 'Copy', image: Image.asset('assets/copy.png')),
       // MenuItem(title: 'Home', image: Icon(Icons.home, color: Colors.white,)),
-      MenuItem(title: 'Mail', image: Icon(Icons.mail, color: Colors.white,)),
-      MenuItem(title: 'Power', image: Icon(Icons.power, color: Colors.white,)),
-      MenuItem(title: 'Setting', image: Icon(Icons.settings, color: Colors.white,)),
+      MenuItem(
+          title: 'Mail',
+          image: Icon(
+            Icons.mail,
+            color: Colors.white,
+          )),
+      MenuItem(
+          title: 'Power',
+          image: Icon(
+            Icons.power,
+            color: Colors.white,
+          )),
+      MenuItem(
+          title: 'Setting',
+          image: Icon(
+            Icons.settings,
+            color: Colors.white,
+          )),
       MenuItem(
           title: 'PopupMenu',
           image: Icon(
@@ -48,7 +64,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void stateChanged(bool isShow) {
-    print('menu is ${ isShow ? 'showing': 'closed' }');
+    print('menu is ${isShow ? 'showing' : 'closed'}');
   }
 
   void onClickMenu(MenuItemProvider item) {
@@ -62,7 +78,6 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     PopupMenu.context = context;
-    
 
     return Scaffold(
       appBar: AppBar(
@@ -87,10 +102,24 @@ class _MyHomePageState extends State<MyHomePage> {
                 onPressed: customBackground,
                 child: Text('Show Menu'),
               ),
+            ),
+            Container(
+              child: MaterialButton(
+                height: 30.0,
+                child: Text('Gestures Demo'),
+                onPressed: onGesturesDemo,
+              ),
             )
           ],
         ),
       ),
+    );
+  }
+
+  void onGesturesDemo() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => GestureDemo()),
     );
   }
 

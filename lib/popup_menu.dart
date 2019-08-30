@@ -156,7 +156,20 @@ class PopupMenu {
         onTap: () {
           dismiss();
         },
-        child: Stack(
+        onTapDown: (TapDownDetails details) {
+          dismiss();
+        },
+        // onPanStart: (DragStartDetails details) {
+        //   dismiss();
+        // },
+        onVerticalDragStart: (DragStartDetails details) {
+          dismiss();
+        },
+        onHorizontalDragStart: (DragStartDetails details) {
+          dismiss();
+        },
+        child: Container(
+          child: Stack(
           children: <Widget>[
             // triangle arrow
             Positioned(
@@ -193,6 +206,7 @@ class PopupMenu {
               ),
             )
           ],
+        ),
         ),
       );
     });

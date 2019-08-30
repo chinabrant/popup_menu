@@ -1,3 +1,6 @@
+## [1.0.3] - 2019.08.30
+* Close menu on scroll/swipe gestures. [issues 3](https://github.com/chinabrant/popup_menu/issues/3)
+
 ## [1.0.2] - 2019.08.19
 * Fix #1
 * Fix health suggestions
