@@ -4,13 +4,13 @@
 
 This project was writed with pure dart code，which means it's support both iOS and Android.
 
-# ScreenShot
-<img src="https://github.com/chinabrant/popup_menu/blob/master/01.png" width="20%"><img src="https://github.com/chinabrant/popup_menu/blob/master/02.png" width="20%"><img src="https://github.com/chinabrant/popup_menu/blob/master/03.png" width="20%">
+# Screenshot
+<img src="https://wx2.sinaimg.cn/mw1024/acbce940gy1g6hsz8566vj20ek06waa9.jpg" width="20%"><img src="https://wx3.sinaimg.cn/mw1024/acbce940gy1g6hsz86ki9j209u0am74i.jpg" width="20%"><img src="https://wx2.sinaimg.cn/mw1024/acbce940gy1g6hsz8a1t2j20eg0ac74q.jpg" width="20%">
 
-# TODO
+# Todo
 - [ ] show/hide animation
 
-# How To Use
+# Usage
 
 
 You can find the demo at the 'example' folder.
