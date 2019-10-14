@@ -51,6 +51,7 @@ class PopupMenu {
   MenuClickCallback onClickMenu;
   PopupMenuStateChanged stateChanged;
   Rect _showRect; // 显示在哪个view的rect
+  Size _screenSize; // 屏幕的尺寸
   bool _isDown = true; // 是显示在下方还是上方，通过计算得到
   static BuildContext context;
   // The max column count, default is 4.
@@ -93,6 +94,7 @@ class PopupMenu {
 
     this.items = items ?? this.items;
     this._showRect = rect ?? PopupMenu.getWidgetGlobalRect(widgetKey);
+    this._screenSize = window.physicalSize/window.devicePixelRatio;
     this.dismissCallback = dismissCallback;
 
     _calculatePosition(PopupMenu.context);
@@ -126,6 +128,11 @@ class PopupMenu {
     double dx = _showRect.left + _showRect.width / 2.0 - menuWidth() / 2.0;
     if (dx < 10.0) {
       dx = 10.0;
+    }
+
+    if(dx + menuWidth() > _screenSize.width && dx > 10.0) {
+      double tempDx = _screenSize.width- menuWidth() - 10;
+      if(tempDx > 10) dx = tempDx;
     }
 
     double dy = _showRect.top - menuHeight();
