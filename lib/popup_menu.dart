@@ -134,6 +134,7 @@ class PopupMenu {
       dy = arrowHeight + _showRect.height + _showRect.top;
       _isDown = false;
     } else {
+      dy -= arrowHeight;
       _isDown = true;
     }
 
@@ -156,9 +157,9 @@ class PopupMenu {
         onTap: () {
           dismiss();
         },
-        onTapDown: (TapDownDetails details) {
-          dismiss();
-        },
+//        onTapDown: (TapDownDetails details) {
+//          dismiss();
+//        },
         // onPanStart: (DragStartDetails details) {
         //   dismiss();
         // },
