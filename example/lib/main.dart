@@ -28,6 +28,7 @@ class _MyHomePageState extends State<MyHomePage> {
   PopupMenu menu;
   GlobalKey btnKey = GlobalKey();
   GlobalKey btnKey2 = GlobalKey();
+  GlobalKey btnKey3 = GlobalKey();
 
   @override
   void initState() {
@@ -60,7 +61,7 @@ class _MyHomePageState extends State<MyHomePage> {
             Icons.menu,
             color: Colors.white,
           ))
-    ], onClickMenu: onClickMenu, onDismiss: onDismiss, maxColumn: 1);
+    ], onClickMenu: onClickMenu, onDismiss: onDismiss, maxColumn: 4);
   }
 
   void stateChanged(bool isShow) {
@@ -85,9 +86,10 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
             Container(
+              color: Colors.blue,
               child: MaterialButton(
                 height: 45.0,
                 key: btnKey,
@@ -105,6 +107,14 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             Container(
               child: MaterialButton(
+                key: btnKey3,
+                height: 45.0,
+                onPressed: onDismissOnlyBeCalledOnce,
+                child: Text('Show Menu'),
+              ),
+            ),
+            Container(
+              child: MaterialButton(
                 height: 30.0,
                 child: Text('Gestures Demo'),
                 onPressed: onGesturesDemo,
@@ -116,7 +126,13 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
+  void onDismissOnlyBeCalledOnce() {
+    menu.show(widgetKey: btnKey3);
+  }
+
   void onGesturesDemo() {
+    menu.dismiss();
+    return;
     Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => GestureDemo()),
