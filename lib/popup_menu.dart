@@ -66,6 +66,8 @@ class PopupMenu {
   VoidCallback dismissCallback;
   MenuClickCallback onClickMenu;
   PopupMenuStateChanged stateChanged;
+
+  Size _screenSize; // 屏幕的尺寸
   
   /// Cannot be null
   static BuildContext context;
@@ -110,6 +112,7 @@ class PopupMenu {
 
     this.items = items ?? this.items;
     this._showRect = rect ?? PopupMenu.getWidgetGlobalRect(widgetKey);
+    this._screenSize = window.physicalSize/window.devicePixelRatio;
     this.dismissCallback = dismissCallback;
 
     _calculatePosition(PopupMenu.context);
@@ -145,12 +148,18 @@ class PopupMenu {
       dx = 10.0;
     }
 
+    if(dx + menuWidth() > _screenSize.width && dx > 10.0) {
+      double tempDx = _screenSize.width- menuWidth() - 10;
+      if(tempDx > 10) dx = tempDx;
+    }
+
     double dy = _showRect.top - menuHeight();
     if (dy <= MediaQuery.of(context).padding.top + 10) {
       // The have not enough space above, show menu under the widget.
       dy = arrowHeight + _showRect.height + _showRect.top;
       _isDown = false;
     } else {
+      dy -= arrowHeight;
       _isDown = true;
     }
 
@@ -173,9 +182,9 @@ class PopupMenu {
         onTap: () {
           dismiss();
         },
-        onTapDown: (TapDownDetails details) {
-          dismiss();
-        },
+//        onTapDown: (TapDownDetails details) {
+//          dismiss();
+//        },
         // onPanStart: (DragStartDetails details) {
         //   dismiss();
         // },
