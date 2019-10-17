@@ -1,3 +1,8 @@
+## [1.0.4] - 2019.10.17
+* Fix [#5](https://github.com/chinabrant/popup_menu/issues/5)
+* Add some comments
+* Fix MenuItemProvider, you can use custom model now.
+
 ## [1.0.3] - 2019.08.30
 * Close menu on scroll/swipe gestures. [issues 3](https://github.com/chinabrant/popup_menu/issues/3)
 
