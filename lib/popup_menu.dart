@@ -42,26 +42,44 @@ class PopupMenu {
   static var itemHeight = 65.0;
   static var arrowHeight = 10.0;
   OverlayEntry _entry;
-  List<MenuItem> items;
-  int _row; // row count
-  int _col; // col count
-  // The left top point of this menu.
+  List<MenuItemProvider> items;
+
+  /// row count
+  int _row; 
+
+  /// col count
+  int _col; 
+
+  /// The left top point of this menu.
   Offset _offset;
+
+  /// Menu will show at above or under this rect
+  Rect _showRect;
+
+  /// if false menu is show above of the widget, otherwise menu is show under the widget
+  bool _isDown = true; 
+
+  /// The max column count, default is 4.
+  int _maxColumn;
+
+  /// callback
   VoidCallback dismissCallback;
   MenuClickCallback onClickMenu;
   PopupMenuStateChanged stateChanged;
-  Rect _showRect; // 显示在哪个view的rect
+
   Size _screenSize; // 屏幕的尺寸
-  bool _isDown = true; // 是显示在下方还是上方，通过计算得到
+  
+  /// Cannot be null
   static BuildContext context;
-  // The max column count, default is 4.
-  int _maxColumn;
+  
+  /// style
   Color _backgroundColor;
   Color _highlightColor;
   Color _lineColor;
 
+  /// It's showing or not.
   bool _isShow = false;
-  bool get isShow => _isShow; // It's showing or not.
+  bool get isShow => _isShow; 
 
   PopupMenu(
       {MenuClickCallback onClickMenu,
@@ -72,7 +90,7 @@ class PopupMenu {
       Color highlightColor,
       Color lineColor,
       PopupMenuStateChanged stateChanged,
-      List<MenuItem> items}) {
+      List<MenuItemProvider> items}) {
     this.onClickMenu = onClickMenu;
     this.dismissCallback = onDismiss;
     this.stateChanged = stateChanged;
@@ -86,7 +104,7 @@ class PopupMenu {
     }
   }
 
-  void show({Rect rect, GlobalKey widgetKey, List<MenuItem> items}) {
+  void show({Rect rect, GlobalKey widgetKey, List<MenuItemProvider> items}) {
     if (rect == null && widgetKey == null) {
       print("'rect' and 'key' can't be both null");
       return;
@@ -243,7 +261,7 @@ class PopupMenu {
 
   // 创建一行的item,  row 从0开始算
   List<Widget> _createRowItems(int row) {
-    List<MenuItem> subItems =
+    List<MenuItemProvider> subItems =
         items.sublist(row * _col, min(row * _col + _col, items.length));
     List<Widget> itemWidgets = [];
     int i = 0;
@@ -314,7 +332,7 @@ class PopupMenu {
     return width / ratio;
   }
 
-  Widget _createMenuItem(MenuItem item, bool showLine) {
+  Widget _createMenuItem(MenuItemProvider item, bool showLine) {
     return _MenuItemWidget(
       item: item,
       showLine: showLine,
@@ -334,6 +352,11 @@ class PopupMenu {
   }
 
   void dismiss() {
+    if (!_isShow) {
+      // Remove method should only be called once
+      return;
+    }
+    
     _entry.remove();
     _isShow = false;
     if (dismissCallback != null) {
@@ -347,7 +370,7 @@ class PopupMenu {
 }
 
 class _MenuItemWidget extends StatefulWidget {
-  final MenuItem item;
+  final MenuItemProvider item;
   // 是否要显示右边的分隔线
   final bool showLine;
   final Color lineColor;
@@ -445,7 +468,7 @@ class _MenuItemWidgetState extends State<_MenuItemWidget> {
           child: Material(
             color: Colors.transparent,
             child: Text(
-              widget.item.title,
+              widget.item.menuTitle,
               style: widget.item.menuTextStyle,
             ),
           ),
