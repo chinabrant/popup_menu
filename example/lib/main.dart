@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:popup_menu/popup_menu.dart';
-import 'package:popup_menu_example/gesture_demo.dart';
 
 void main() => runApp(MyApp());
 
@@ -134,10 +133,10 @@ class _MyHomePageState extends State<MyHomePage> {
   void onGesturesDemo() {
     menu.dismiss();
     return;
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => GestureDemo()),
-    );
+//    Navigator.push(
+//      context,
+//      MaterialPageRoute(builder: (context) => GestureDemo()),
+//    );
   }
 
   void checkState(BuildContext context) {

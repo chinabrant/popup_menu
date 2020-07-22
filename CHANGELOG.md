@@ -1,3 +1,6 @@
+## [1.0.6] - 2020.07.22
+* Adding `itemWidth` `itemHeight` `arrowHeight` as optional parameters [@Saifallak](https://github.com/Saifallak)
+
 ## [1.0.4] - 2019.10.17
 * Fix [#5](https://github.com/chinabrant/popup_menu/issues/5)
 * Add some comments
