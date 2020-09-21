@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:popup_menu/popup_menu.dart';
-import 'package:popup_menu_example/gesture_demo.dart';
 
 void main() => runApp(MyApp());
 
@@ -134,10 +133,6 @@ class _MyHomePageState extends State<MyHomePage> {
   void onGesturesDemo() {
     menu.dismiss();
     return;
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => GestureDemo()),
-    );
   }
 
   void checkState(BuildContext context) {
@@ -150,9 +145,19 @@ class _MyHomePageState extends State<MyHomePage> {
     PopupMenu menu = PopupMenu(
         // backgroundColor: Colors.teal,
         // lineColor: Colors.tealAccent,
-        maxColumn: 3,
+        menuTheme: MenuTheme(
+            itemSize: Size(300, 100),
+            menuType: MenuType.oneLine,
+            arrowHeight: 10.0),
+        maxColumn: 1,
         items: [
-          MenuItem(title: 'Copy', image: Image.asset('assets/copy.png')),
+          MenuItem(
+              title: 'Copy',
+              image: Image.asset('assets/copy.png'),
+              textStyle: TextStyle(
+                color: Colors.white,
+                fontSize: 24,
+              )),
           // MenuItem(
           //     title: 'Home',
           //     // textStyle: TextStyle(fontSize: 10.0, color: Colors.tealAccent),
@@ -171,18 +176,30 @@ class _MyHomePageState extends State<MyHomePage> {
               image: Icon(
                 Icons.power,
                 color: Colors.white,
+              ),
+              textStyle: TextStyle(
+                color: Colors.white,
+                fontSize: 24,
               )),
           MenuItem(
               title: 'Setting',
               image: Icon(
                 Icons.settings,
                 color: Colors.white,
+              ),
+              textStyle: TextStyle(
+                color: Colors.white,
+                fontSize: 24,
               )),
           MenuItem(
               title: 'PopupMenu',
               image: Icon(
                 Icons.menu,
                 color: Colors.white,
+              ),
+              textStyle: TextStyle(
+                color: Colors.white,
+                fontSize: 24,
               ))
         ],
         onClickMenu: onClickMenu,
