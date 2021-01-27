@@ -462,6 +462,7 @@ class _MenuItemWidgetState extends State<_MenuItemWidget> {
               child: Text(
                 widget.item.menuTitle,
                 style: widget.item.menuTextStyle,
+                textAlign: TextAlign.center,
               ),
             ),
           )
