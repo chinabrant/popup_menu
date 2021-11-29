@@ -1,3 +1,9 @@
+## [1.0.5] - 2021.11.29
+
+* Custom background decoration.
+* Added Animation.
+* Added popup menu box offset.
+
 ## [1.0.4] - 2019.10.17
 * Fix [#5](https://github.com/chinabrant/popup_menu/issues/5)
 * Add some comments
@@ -18,3 +24,4 @@
 
 * Custom backgroundColor
 * Custom TextStyle
+

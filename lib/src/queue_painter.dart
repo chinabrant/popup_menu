@@ -1,11 +1,12 @@
 import 'package:flutter/rendering.dart';
 
-// 画弹出菜单下面的三角形
-class TrianglePainter extends CustomPainter {
+class QueuePainter extends CustomPainter {
+  QueuePainter({
+    this.isDown = true,
+    this.color = const Color.fromARGB(0, 0, 0, 0),
+  });
   bool isDown;
   Color color;
-
-  TrianglePainter({this.isDown = true, this.color=const Color.fromARGB(0, 0, 0, 0)});
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -29,7 +30,5 @@ class TrianglePainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(CustomPainter oldDelegate) {
-    return true;
-  }
+  bool shouldRepaint(CustomPainter oldDelegate) => true;
 }
