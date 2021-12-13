@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:popup_menu/popup_menu.dart';
-import 'package:popup_menu_example/gesture_demo.dart';
+
+import 'gesture_demo.dart';
 
 void main() => runApp(MyApp());
 
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
+  MyHomePage({Key? key, required this.title}) : super(key: key);
 
   final String title;
 
@@ -25,7 +26,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  PopupMenu menu;
+  late PopupMenu menu;
   GlobalKey btnKey = GlobalKey();
   GlobalKey btnKey2 = GlobalKey();
   GlobalKey btnKey3 = GlobalKey();
@@ -34,34 +35,60 @@ class _MyHomePageState extends State<MyHomePage> {
   void initState() {
     super.initState();
 
-    menu = PopupMenu(items: [
-      // MenuItem(title: 'Copy', image: Image.asset('assets/copy.png')),
-      // MenuItem(title: 'Home', image: Icon(Icons.home, color: Colors.white,)),
-      MenuItem(
-          title: 'Mail',
-          image: Icon(
-            Icons.mail,
-            color: Colors.white,
-          )),
-      MenuItem(
-          title: 'Power',
-          image: Icon(
-            Icons.power,
-            color: Colors.white,
-          )),
-      MenuItem(
-          title: 'Setting',
-          image: Icon(
-            Icons.settings,
-            color: Colors.white,
-          )),
-      MenuItem(
-          title: 'PopupMenu',
-          image: Icon(
-            Icons.menu,
-            color: Colors.white,
-          ))
-    ], onClickMenu: onClickMenu, onDismiss: onDismiss, maxColumn: 4);
+    menu = PopupMenu(
+      items: [
+        // MenuItem(title: 'Copy', image: Image.asset('assets/copy.png')),
+        // MenuItem(title: 'Home', image: Icon(Icons.home, color: Colors.white,)),
+        MenuItem(
+            title: 'Mail',
+            textAlign: TextAlign.center,
+            textStyle: TextStyle(
+              color: Color(0xffc5c5c5),
+              fontSize: 10.0,
+            ),
+            image: Icon(
+              Icons.mail,
+              color: Colors.white,
+            )),
+        MenuItem(
+            title: 'Power',
+            textAlign: TextAlign.center,
+            textStyle: TextStyle(
+              color: Color(0xffc5c5c5),
+              fontSize: 10.0,
+            ),
+            image: Icon(
+              Icons.power,
+              color: Colors.white,
+            )),
+        MenuItem(
+            title: 'Setting',
+            textAlign: TextAlign.center,
+            textStyle: TextStyle(
+              color: Color(0xffc5c5c5),
+              fontSize: 10.0,
+            ),
+            image: Icon(
+              Icons.settings,
+              color: Colors.white,
+            )),
+        MenuItem(
+            title: 'PopupMenu',
+            textAlign: TextAlign.center,
+            textStyle: TextStyle(
+              color: Color(0xffc5c5c5),
+              fontSize: 10.0,
+            ),
+            image: Icon(
+              Icons.menu,
+              color: Colors.white,
+            ))
+      ],
+      onClickMenu: onClickMenu,
+      onDismiss: onDismiss,
+      maxColumn: 4,
+      context: context,
+    );
   }
 
   void stateChanged(bool isShow) {
@@ -152,7 +179,15 @@ class _MyHomePageState extends State<MyHomePage> {
         // lineColor: Colors.tealAccent,
         maxColumn: 3,
         items: [
-          MenuItem(title: 'Copy', image: Image.asset('assets/copy.png')),
+          MenuItem(
+            title: 'Copy',
+            textAlign: TextAlign.center,
+            textStyle: TextStyle(
+              color: Color(0xffc5c5c5),
+              fontSize: 10.0,
+            ),
+            image: Image.asset('assets/copy.png'),
+          ),
           // MenuItem(
           //     title: 'Home',
           //     // textStyle: TextStyle(fontSize: 10.0, color: Colors.tealAccent),
@@ -167,27 +202,46 @@ class _MyHomePageState extends State<MyHomePage> {
           //       color: Colors.white,
           //     )),
           MenuItem(
-              title: 'Power',
-              image: Icon(
-                Icons.power,
-                color: Colors.white,
-              )),
+            title: 'Power',
+            textAlign: TextAlign.center,
+            textStyle: TextStyle(
+              color: Color(0xffc5c5c5),
+              fontSize: 10.0,
+            ),
+            image: Icon(
+              Icons.power,
+              color: Colors.white,
+            ),
+          ),
           MenuItem(
-              title: 'Setting',
-              image: Icon(
-                Icons.settings,
-                color: Colors.white,
-              )),
+            title: 'Setting',
+            textAlign: TextAlign.center,
+            textStyle: TextStyle(
+              color: Color(0xffc5c5c5),
+              fontSize: 10.0,
+            ),
+            image: Icon(
+              Icons.settings,
+              color: Colors.white,
+            ),
+          ),
           MenuItem(
-              title: 'PopupMenu',
-              image: Icon(
-                Icons.menu,
-                color: Colors.white,
-              ))
+            title: 'PopupMenu',
+            textAlign: TextAlign.center,
+            textStyle: TextStyle(
+              color: Color(0xffc5c5c5),
+              fontSize: 10.0,
+            ),
+            image: Icon(
+              Icons.menu,
+              color: Colors.white,
+            ),
+          )
         ],
         onClickMenu: onClickMenu,
         stateChanged: stateChanged,
-        onDismiss: onDismiss);
+        onDismiss: onDismiss,
+        context: context);
     menu.show(widgetKey: btnKey);
   }
 
@@ -198,42 +252,81 @@ class _MyHomePageState extends State<MyHomePage> {
         // lineColor: Colors.tealAccent,
         // maxColumn: 2,
         items: [
-          MenuItem(title: 'Copy', image: Image.asset('assets/copy.png')),
           MenuItem(
-              title: 'Home',
-              // textStyle: TextStyle(fontSize: 10.0, color: Colors.tealAccent),
-              image: Icon(
-                Icons.home,
-                color: Colors.white,
-              )),
+            title: 'Copy',
+            textAlign: TextAlign.center,
+            textStyle: TextStyle(
+              color: Color(0xffc5c5c5),
+              fontSize: 10.0,
+            ),
+            image: Image.asset('assets/copy.png'),
+          ),
           MenuItem(
-              title: 'Mail',
-              image: Icon(
-                Icons.mail,
-                color: Colors.white,
-              )),
+            title: 'Home',
+            textAlign: TextAlign.center,
+            textStyle: TextStyle(
+              color: Color(0xffc5c5c5),
+              fontSize: 10.0,
+            ),
+            // textStyle: TextStyle(fontSize: 10.0, color: Colors.tealAccent),
+            image: Icon(
+              Icons.home,
+              color: Colors.white,
+            ),
+          ),
           MenuItem(
-              title: 'Power',
-              image: Icon(
-                Icons.power,
-                color: Colors.white,
-              )),
+            title: 'Mail',
+            textAlign: TextAlign.center,
+            textStyle: TextStyle(
+              color: Color(0xffc5c5c5),
+              fontSize: 10.0,
+            ),
+            image: Icon(
+              Icons.mail,
+              color: Colors.white,
+            ),
+          ),
           MenuItem(
-              title: 'Setting',
-              image: Icon(
-                Icons.settings,
-                color: Colors.white,
-              )),
+            title: 'Power',
+            textAlign: TextAlign.center,
+            textStyle: TextStyle(
+              color: Color(0xffc5c5c5),
+              fontSize: 10.0,
+            ),
+            image: Icon(
+              Icons.power,
+              color: Colors.white,
+            ),
+          ),
           MenuItem(
-              title: 'PopupMenu',
-              image: Icon(
-                Icons.menu,
-                color: Colors.white,
-              ))
+            title: 'Setting',
+            textAlign: TextAlign.center,
+            textStyle: TextStyle(
+              color: Color(0xffc5c5c5),
+              fontSize: 10.0,
+            ),
+            image: Icon(
+              Icons.settings,
+              color: Colors.white,
+            ),
+          ),
+          MenuItem(
+            title: 'PopupMenu',
+            textAlign: TextAlign.center,
+            textStyle: TextStyle(
+              color: Color(0xffc5c5c5),
+              fontSize: 10.0,
+            ),
+            image: Icon(
+              Icons.menu,
+              color: Colors.white,
+            ),
+          )
         ],
         onClickMenu: onClickMenu,
         stateChanged: stateChanged,
-        onDismiss: onDismiss);
+        onDismiss: onDismiss,
+        context: context);
     menu.show(widgetKey: btnKey2);
   }
 }
