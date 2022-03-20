@@ -9,23 +9,23 @@ import 'triangle_painter.dart';
 
 abstract class MenuItemProvider {
   String get menuTitle;
-  Widget get menuImage;
   dynamic get menuUserInfo;
+  Widget? get menuImage;
   TextStyle get menuTextStyle;
   TextAlign get menuTextAlign;
 }
 
 class MenuItem extends MenuItemProvider {
-  Widget image; // 图标名称
+  Widget? image; // 图标名称
   String title; // 菜单标题
   var userInfo; // 额外的菜单荐信息
   TextStyle textStyle;
   TextAlign textAlign;
 
-  MenuItem({this.title, this.image, this.userInfo, this.textStyle, this.textAlign});
+  MenuItem({this.title="", this.image, this.userInfo, required this.textStyle, required this.textAlign});
 
   @override
-  Widget get menuImage => image;
+  Widget? get menuImage => image;
 
   @override
   String get menuTitle => title;
@@ -51,61 +51,61 @@ class PopupMenu {
   static var itemWidth = 72.0;
   static var itemHeight = 65.0;
   static var arrowHeight = 10.0;
-  OverlayEntry _entry;
-  List<MenuItemProvider> items;
+  OverlayEntry? _entry;
+  late List<MenuItemProvider> items;
 
   /// row count
-  int _row; 
+  int _row = 1;
 
   /// col count
-  int _col; 
+  int _col = 1;
 
   /// The left top point of this menu.
-  Offset _offset;
+  late Offset _offset;
 
   /// Menu will show at above or under this rect
-  Rect _showRect;
+  late Rect _showRect;
 
   /// if false menu is show above of the widget, otherwise menu is show under the widget
-  bool _isDown = true; 
+  bool _isDown = true;
 
   /// The max column count, default is 4.
-  int _maxColumn;
+  int _maxColumn = 4;
 
   /// callback
-  VoidCallback dismissCallback;
-  MenuClickCallback onClickMenu;
-  PopupMenuStateChanged stateChanged;
+  VoidCallback? dismissCallback;
+  MenuClickCallback? onClickMenu;
+  PopupMenuStateChanged? stateChanged;
 
-  Size _screenSize; // 屏幕的尺寸
+  late Size _screenSize; // 屏幕的尺寸
   
   /// Cannot be null
-  static BuildContext context;
+  static late BuildContext context;
   
   /// style
-  Color _backgroundColor;
-  Color _highlightColor;
-  Color _lineColor;
+  late Color _backgroundColor;
+  late Color _highlightColor;
+  late Color _lineColor;
 
   /// It's showing or not.
   bool _isShow = false;
   bool get isShow => _isShow; 
 
   PopupMenu(
-      {MenuClickCallback onClickMenu,
-      BuildContext context,
-      VoidCallback onDismiss,
-      int maxColumn,
-      Color backgroundColor,
-      Color highlightColor,
-      Color lineColor,
-      PopupMenuStateChanged stateChanged,
-      List<MenuItemProvider> items}) {
+      {MenuClickCallback? onClickMenu,
+      required BuildContext context,
+      VoidCallback? onDismiss,
+      int maxColumn=4,
+      Color? backgroundColor,
+      Color? highlightColor,
+      Color? lineColor,
+      PopupMenuStateChanged? stateChanged,
+      required List<MenuItemProvider> items}) {
     this.onClickMenu = onClickMenu;
     this.dismissCallback = onDismiss;
     this.stateChanged = stateChanged;
     this.items = items;
-    this._maxColumn = maxColumn ?? 4;
+    this._maxColumn = maxColumn;
     this._backgroundColor = backgroundColor ?? Color(0xff232323);
     this._lineColor = lineColor ?? Color(0xff353535);
     this._highlightColor = highlightColor ?? Color(0x55000000);
@@ -114,14 +114,14 @@ class PopupMenu {
     }
   }
 
-  void show({Rect rect, GlobalKey widgetKey, List<MenuItemProvider> items}) {
+  void show({Rect? rect, GlobalKey? widgetKey, List<MenuItemProvider>? items}) {
     if (rect == null && widgetKey == null) {
       print("'rect' and 'key' can't be both null");
       return;
     } 
 
     this.items = items ?? this.items;
-    this._showRect = rect ?? PopupMenu.getWidgetGlobalRect(widgetKey);
+    this._showRect = rect ?? PopupMenu.getWidgetGlobalRect(widgetKey!);
     this._screenSize = window.physicalSize/window.devicePixelRatio;
     this.dismissCallback = dismissCallback;
 
@@ -132,15 +132,15 @@ class PopupMenu {
     });
 
     
-    Overlay.of(PopupMenu.context).insert(_entry);
+    Overlay.of(PopupMenu.context)!.insert(_entry!);
     _isShow = true;
     if (this.stateChanged != null) {
-      this.stateChanged(true);
+      this.stateChanged!(true);
     }
   }
 
   static Rect getWidgetGlobalRect(GlobalKey key) {
-    RenderBox renderBox = key.currentContext.findRenderObject();
+    RenderBox renderBox = key.currentContext!.findRenderObject() as RenderBox;
     var offset = renderBox.localToGlobal(Offset.zero);
     return Rect.fromLTWH(
         offset.dx, offset.dy, renderBox.size.width, renderBox.size.height);
@@ -288,7 +288,7 @@ class PopupMenu {
 
   // calculate row count
   int _calculateRowCount() {
-    if (items == null || items.length == 0) {
+    if (items.length == 0) {
       debugPrint('error menu items can not be null');
       return 0;
     }
@@ -306,7 +306,7 @@ class PopupMenu {
 
   // calculate col count
   int _calculateColCount() {
-    if (items == null || items.length == 0) {
+    if (items!.length == 0) {
       debugPrint('error menu items can not be null');
       return 0;
     }
@@ -355,7 +355,7 @@ class PopupMenu {
 
   void itemClicked(MenuItemProvider item) {
     if (onClickMenu != null) {
-      onClickMenu(item);
+      onClickMenu!(item);
     }
 
     dismiss();
@@ -367,14 +367,14 @@ class PopupMenu {
       return;
     }
     
-    _entry.remove();
+    _entry?.remove();
     _isShow = false;
     if (dismissCallback != null) {
-      dismissCallback();
+      dismissCallback!();
     }
 
     if (this.stateChanged != null) {
-      this.stateChanged(false);
+      this.stateChanged!(false);
     }
   }
 }
@@ -387,15 +387,15 @@ class _MenuItemWidget extends StatefulWidget {
   final Color backgroundColor;
   final Color highlightColor;
 
-  final Function(MenuItemProvider item) clickCallback;
+  final Function(MenuItemProvider item)? clickCallback;
 
   _MenuItemWidget(
-      {this.item,
+      {required this.item,
       this.showLine = false,
       this.clickCallback,
-      this.lineColor,
-      this.backgroundColor,
-      this.highlightColor});
+      required this.lineColor,
+      required this.backgroundColor,
+      required this.highlightColor});
 
   @override
   State<StatefulWidget> createState() {
@@ -431,7 +431,7 @@ class _MenuItemWidgetState extends State<_MenuItemWidget> {
       },
       onTap: () {
         if (widget.clickCallback != null) {
-          widget.clickCallback(widget.item);
+          widget.clickCallback!(widget.item);
         }
       },
       child: Container(
