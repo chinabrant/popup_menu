@@ -9,6 +9,7 @@ import 'triangle_painter.dart';
 
 abstract class MenuItemProvider {
   String get menuTitle;
+  dynamic get menuUserInfo;
   Widget? get menuImage;
   TextStyle get menuTextStyle;
   TextAlign get menuTextAlign;
@@ -28,6 +29,9 @@ class MenuItem extends MenuItemProvider {
 
   @override
   String get menuTitle => title;
+
+  @override
+  dynamic get menuUserInfo => userInfo;
 
   @override
   TextStyle get menuTextStyle =>
