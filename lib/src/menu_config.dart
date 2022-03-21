@@ -6,10 +6,10 @@ class MenuConfig {
   /// 菜单类型
   final MenuType type;
 
-  /// 格子类型菜单的宽度
+  /// 菜单的宽度
   final double itemWidth;
 
-  /// 格子类型菜单项的高度
+  /// 菜单项的高度
   final double itemHeight;
 
   /// 箭头的高度
@@ -37,4 +37,23 @@ class MenuConfig {
     this.highlightColor = const Color(0xff353535),
     this.lineColor = const Color(0x55000000),
   });
+
+  factory MenuConfig.forList({
+    double itemWidth = 120.0,
+    double itemHeight = 40.0,
+    double arrowHeight = 10.0,
+    Color backgroundColor = Colors.white,
+    Color highlightColor = const Color(0xff353535),
+    Color lineColor = const Color(0x55000000),
+  }) {
+    return MenuConfig(
+      type: MenuType.list,
+      itemWidth: itemWidth,
+      itemHeight: itemHeight,
+      arrowHeight: arrowHeight,
+      backgroundColor: backgroundColor,
+      highlightColor: highlightColor,
+      lineColor: lineColor,
+    );
+  }
 }

@@ -7,6 +7,8 @@ This project was writed with pure dart code，which means it's support both iOS 
 # Screenshot
 <img src="https://wx2.sinaimg.cn/mw1024/acbce940gy1g6hsz8566vj20ek06waa9.jpg" width="20%"><img src="https://wx3.sinaimg.cn/mw1024/acbce940gy1g6hsz86ki9j209u0am74i.jpg" width="20%"><img src="https://wx2.sinaimg.cn/mw1024/acbce940gy1g6hsz8a1t2j20eg0ac74q.jpg" width="20%">
 
+<img src="04.png">
+
 # Todo
 - [ ] show/hide animation
 
@@ -29,14 +31,12 @@ PopupMenu menu = PopupMenu(
         MenuItem(title: 'Setting', image: Icon(Icons.settings, color: Colors.white,)), 
         MenuItem(title: 'Traffic', image: Icon(Icons.traffic, color: Colors.white,))], 
       onClickMenu: onClickMenu, 
-      stateChanged: stateChanged,
+      onShow: onShow,
       onDismiss: onDismiss);
 
 menu.show(rect: rect);
 
-void stateChanged(bool isShow) {
-  print('menu is ${ isShow ? 'showing': 'closed' }');
-}
+
 ```
 
 or

@@ -29,47 +29,11 @@ class _MyHomePageState extends State<MyHomePage> {
   GlobalKey btnKey = GlobalKey();
   GlobalKey btnKey2 = GlobalKey();
   GlobalKey btnKey3 = GlobalKey();
+  GlobalKey btnKey4 = GlobalKey();
 
   @override
   void initState() {
     super.initState();
-
-    menu = PopupMenu(
-      items: [
-        // MenuItem(title: 'Copy', image: Image.asset('assets/copy.png')),
-        // MenuItem(title: 'Home', image: Icon(Icons.home, color: Colors.white,)),
-        MenuItem(
-            title: 'Mail',
-            image: Icon(
-              Icons.mail,
-              color: Colors.white,
-            )),
-        MenuItem(
-            title: 'Power',
-            image: Icon(
-              Icons.power,
-              color: Colors.white,
-            )),
-        MenuItem(
-            title: 'Setting',
-            image: Icon(
-              Icons.settings,
-              color: Colors.white,
-            )),
-        MenuItem(
-            title: 'PopupMenu',
-            image: Icon(
-              Icons.menu,
-              color: Colors.white,
-            ))
-      ],
-      onClickMenu: onClickMenu,
-      onDismiss: onDismiss,
-    );
-  }
-
-  void stateChanged(bool isShow) {
-    print('menu is ${isShow ? 'showing' : 'closed'}');
   }
 
   void onClickMenu(MenuItemProvider item) {
@@ -80,10 +44,12 @@ class _MyHomePageState extends State<MyHomePage> {
     print('Menu is dismiss');
   }
 
+  void onShow() {
+    print('Menu is show');
+  }
+
   @override
   Widget build(BuildContext context) {
-    PopupMenu.context = context;
-
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
@@ -120,6 +86,14 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             Container(
               child: MaterialButton(
+                key: btnKey4,
+                height: 45.0,
+                onPressed: listMenu,
+                child: Text('List Menu'),
+              ),
+            ),
+            Container(
+              child: MaterialButton(
                 height: 30.0,
                 child: Text('Gestures Demo'),
                 onPressed: onGesturesDemo,
@@ -132,11 +106,25 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void onDismissOnlyBeCalledOnce() {
+    menu = PopupMenu(
+      context: context,
+      items: [
+        // MenuItem(title: 'Copy', image: Image.asset('assets/copy.png')),
+        // MenuItem(title: 'Home', image: Icon(Icons.home, color: Colors.white,)),
+        MenuItem(title: 'Mail', image: Icon(Icons.mail, color: Colors.white)),
+        MenuItem(title: 'Power', image: Icon(Icons.power, color: Colors.white)),
+        MenuItem(
+            title: 'Setting', image: Icon(Icons.settings, color: Colors.white)),
+        MenuItem(
+            title: 'PopupMenu', image: Icon(Icons.menu, color: Colors.white))
+      ],
+      onClickMenu: onClickMenu,
+      onDismiss: onDismiss,
+    );
     menu.show(widgetKey: btnKey3);
   }
 
   void onGesturesDemo() {
-    menu.dismiss();
     // return;
     Navigator.push(
       context,
@@ -144,38 +132,19 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  void checkState(BuildContext context) {
-    final snackBar = new SnackBar(content: new Text('这是一个SnackBar!'));
-
-    Scaffold.of(context).showSnackBar(snackBar);
-  }
-
   void maxColumn() {
     PopupMenu menu = PopupMenu(
+      context: context,
       config: MenuConfig(maxColumn: 3),
       items: [
         MenuItem(title: 'Copy', image: Image.asset('assets/copy.png')),
+        MenuItem(title: 'Power', image: Icon(Icons.power, color: Colors.white)),
         MenuItem(
-            title: 'Power',
-            image: Icon(
-              Icons.power,
-              color: Colors.white,
-            )),
+            title: 'Setting', image: Icon(Icons.settings, color: Colors.white)),
         MenuItem(
-            title: 'Setting',
-            image: Icon(
-              Icons.settings,
-              color: Colors.white,
-            )),
-        MenuItem(
-            title: 'PopupMenu',
-            image: Icon(
-              Icons.menu,
-              color: Colors.white,
-            ))
+            title: 'PopupMenu', image: Icon(Icons.menu, color: Colors.white))
       ],
       onClickMenu: onClickMenu,
-      stateChanged: stateChanged,
       onDismiss: onDismiss,
     );
     menu.show(widgetKey: btnKey);
@@ -184,47 +153,54 @@ class _MyHomePageState extends State<MyHomePage> {
   //
   void customBackground() {
     PopupMenu menu = PopupMenu(
+        context: context,
         config: MenuConfig(
           backgroundColor: Color(0xffc1e0f7),
           lineColor: Colors.tealAccent,
         ),
         items: [
           MenuItem(title: 'Copy', image: Image.asset('assets/copy.png')),
+          MenuItem(title: 'Home', image: Icon(Icons.home, color: Colors.white)),
+          MenuItem(title: 'Mail', image: Icon(Icons.mail, color: Colors.white)),
           MenuItem(
-              title: 'Home',
-              // textStyle: TextStyle(fontSize: 10.0, color: Colors.tealAccent),
-              image: Icon(
-                Icons.home,
-                color: Colors.white,
-              )),
-          MenuItem(
-              title: 'Mail',
-              image: Icon(
-                Icons.mail,
-                color: Colors.white,
-              )),
-          MenuItem(
-              title: 'Power',
-              image: Icon(
-                Icons.power,
-                color: Colors.white,
-              )),
+              title: 'Power', image: Icon(Icons.power, color: Colors.white)),
           MenuItem(
               title: 'Setting',
-              image: Icon(
-                Icons.settings,
-                color: Colors.white,
-              )),
+              image: Icon(Icons.settings, color: Colors.white)),
           MenuItem(
-              title: 'PopupMenu',
-              image: Icon(
-                Icons.menu,
-                color: Colors.white,
-              ))
+              title: 'PopupMenu', image: Icon(Icons.menu, color: Colors.white))
         ],
         onClickMenu: onClickMenu,
-        stateChanged: stateChanged,
         onDismiss: onDismiss);
     menu.show(widgetKey: btnKey2);
+  }
+
+  void listMenu() {
+    PopupMenu menu = PopupMenu(
+        context: context,
+        config: MenuConfig.forList(),
+        items: [
+          // MenuItem.forList(
+          //     title: 'Copy', image: Image.asset('assets/copy.png')),
+          MenuItem.forList(
+              title: 'Home',
+              image: Icon(Icons.home, color: Color(0xFF181818), size: 20)),
+          MenuItem.forList(
+              title: 'Mail',
+              image: Icon(Icons.mail, color: Color(0xFF181818), size: 20)),
+          MenuItem.forList(
+              title: 'Power',
+              image: Icon(Icons.power, color: Color(0xFF181818), size: 20)),
+          MenuItem.forList(
+              title: 'Setting',
+              image: Icon(Icons.settings, color: Color(0xFF181818), size: 20)),
+          MenuItem.forList(
+              title: 'PopupMenu',
+              image: Icon(Icons.menu, color: Color(0xFF181818), size: 20))
+        ],
+        onClickMenu: onClickMenu,
+        onShow: onShow,
+        onDismiss: onDismiss);
+    menu.show(widgetKey: btnKey4);
   }
 }

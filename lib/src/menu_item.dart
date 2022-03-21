@@ -27,6 +27,25 @@ class MenuItem extends MenuItemProvider {
     this.textAlign = TextAlign.center,
   });
 
+  factory MenuItem.forList({
+    required String title,
+    Widget? image,
+    dynamic userInfo,
+    TextStyle textStyle = const TextStyle(
+      color: Color(0xFF181818),
+      fontSize: 10.0,
+    ),
+    TextAlign textAlign = TextAlign.center,
+  }) {
+    return MenuItem(
+      title: title,
+      image: image,
+      userInfo: userInfo,
+      textAlign: textAlign,
+      textStyle: textStyle,
+    );
+  }
+
   @override
   Widget? get menuImage => image;
 

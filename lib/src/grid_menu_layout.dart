@@ -3,14 +3,14 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:popup_menu/popup_menu.dart';
-import 'package:popup_menu/src/triangle_painter.dart';
+import 'package:popup_menu/src/menu_layout.dart';
 
 import 'menu_item_widget.dart';
 
-class GridMenuLayout {
+/// Grid menu layout
+class GridMenuLayout implements MenuLayout {
   final MenuConfig config;
   final List<MenuItemProvider> items;
-  final Rect showRect;
   final VoidCallback onDismiss;
   final BuildContext context;
   final MenuClickCallback? onClickMenu;
@@ -18,11 +18,12 @@ class GridMenuLayout {
   GridMenuLayout({
     required this.config,
     required this.items,
-    required this.showRect,
     required this.onDismiss,
     required this.context,
     this.onClickMenu,
-  });
+  }) {
+    _calculateRowAndCol();
+  }
 
   /// row count
   int _row = 1;
@@ -30,45 +31,13 @@ class GridMenuLayout {
   /// col count
   int _col = 1;
 
-  /// The left top point of this menu.
-  late Offset _offset;
-
-  /// if false menu is show above of the widget, otherwise menu is show under the widget
-  bool _isDown = true;
-
   /// The max column count, default is 4.
   int _maxColumn = 4;
 
-  Size _screenSize = window.physicalSize / window.devicePixelRatio;
-
-  void _calculatePosition(BuildContext context) {
+  /// calculate the menu row and col count
+  void _calculateRowAndCol() {
     _col = _calculateColCount();
     _row = _calculateRowCount();
-    _offset = _calculateOffset(PopupMenu.context);
-  }
-
-  Offset _calculateOffset(BuildContext context) {
-    double dx = showRect.left + showRect.width / 2.0 - menuWidth() / 2.0;
-    if (dx < 10.0) {
-      dx = 10.0;
-    }
-
-    if (dx + menuWidth() > _screenSize.width && dx > 10.0) {
-      double tempDx = _screenSize.width - menuWidth() - 10;
-      if (tempDx > 10) dx = tempDx;
-    }
-
-    double dy = showRect.top - menuHeight();
-    if (dy <= MediaQuery.of(context).padding.top + 10) {
-      // The have not enough space above, show menu under the widget.
-      dy = config.arrowHeight + showRect.height + showRect.top;
-      _isDown = false;
-    } else {
-      dy -= config.arrowHeight;
-      _isDown = true;
-    }
-
-    return Offset(dx, dy);
   }
 
   double menuWidth() {
@@ -78,67 +47,6 @@ class GridMenuLayout {
   // This height exclude the arrow
   double menuHeight() {
     return config.itemHeight * _row;
-  }
-
-  Widget buildPopupMenuLayout() {
-    _calculatePosition(context);
-    return LayoutBuilder(builder: (context, constraints) {
-      return GestureDetector(
-        behavior: HitTestBehavior.translucent,
-        onTap: () {
-          onDismiss();
-        },
-        onVerticalDragStart: (DragStartDetails details) {
-          onDismiss();
-        },
-        onHorizontalDragStart: (DragStartDetails details) {
-          onDismiss();
-        },
-        child: Container(
-          child: Stack(
-            children: <Widget>[
-              // triangle arrow
-              Positioned(
-                left: showRect.left + showRect.width / 2.0 - 7.5,
-                top: _isDown
-                    ? _offset.dy + menuHeight()
-                    : _offset.dy - config.arrowHeight,
-                child: CustomPaint(
-                  size: Size(15.0, config.arrowHeight),
-                  painter: TrianglePainter(
-                      isDown: _isDown, color: config.backgroundColor),
-                ),
-              ),
-              // menu content
-              Positioned(
-                left: _offset.dx,
-                top: _offset.dy,
-                child: Container(
-                  width: menuWidth(),
-                  height: menuHeight(),
-                  child: Column(
-                    children: <Widget>[
-                      ClipRRect(
-                          borderRadius: BorderRadius.circular(10.0),
-                          child: Container(
-                            width: menuWidth(),
-                            height: menuHeight(),
-                            decoration: BoxDecoration(
-                                color: config.backgroundColor,
-                                borderRadius: BorderRadius.circular(10.0)),
-                            child: Column(
-                              children: _createRows(),
-                            ),
-                          )),
-                    ],
-                  ),
-                ),
-              )
-            ],
-          ),
-        ),
-      );
-    });
   }
 
   // 创建行
@@ -247,4 +155,34 @@ class GridMenuLayout {
     onClickMenu?.call(item);
     onDismiss();
   }
+
+  @override
+  Widget build() {
+    return Container(
+      width: menuWidth(),
+      height: menuHeight(),
+      child: Column(
+        children: <Widget>[
+          ClipRRect(
+              borderRadius: BorderRadius.circular(10.0),
+              child: Container(
+                width: menuWidth(),
+                height: menuHeight(),
+                decoration: BoxDecoration(
+                    color: config.backgroundColor,
+                    borderRadius: BorderRadius.circular(10.0)),
+                child: Column(
+                  children: _createRows(),
+                ),
+              )),
+        ],
+      ),
+    );
+  }
+
+  @override
+  double get height => menuHeight();
+
+  @override
+  double get width => menuWidth();
 }
