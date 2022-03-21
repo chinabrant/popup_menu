@@ -1,3 +1,7 @@
+## [2.0.0] - 2022.03.21
+* Refactoring code
+* Support list menu
+
 ## [1.0.4] - 2019.10.17
 * Fix [#5](https://github.com/chinabrant/popup_menu/issues/5)
 * Add some comments
