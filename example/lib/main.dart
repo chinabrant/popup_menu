@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
+  MyHomePage({Key? key, required this.title}) : super(key: key);
 
   final String title;
 
@@ -25,7 +25,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  PopupMenu menu;
+  PopupMenu? menu;
   GlobalKey btnKey = GlobalKey();
   GlobalKey btnKey2 = GlobalKey();
   GlobalKey btnKey3 = GlobalKey();
@@ -109,19 +109,21 @@ class _MyHomePageState extends State<MyHomePage> {
     menu = PopupMenu(
       context: context,
       items: [
-        // MenuItem(title: 'Copy', image: Image.asset('assets/copy.png')),
-        // MenuItem(title: 'Home', image: Icon(Icons.home, color: Colors.white,)),
-        MenuItem(title: 'Mail', image: Icon(Icons.mail, color: Colors.white)),
-        MenuItem(title: 'Power', image: Icon(Icons.power, color: Colors.white)),
-        MenuItem(
+        // PopUpMenuItem(title: 'Copy', image: Image.asset('assets/copy.png')),
+        // PopUpMenuItem(title: 'Home', image: Icon(Icons.home, color: Colors.white,)),
+        PopUpMenuItem(
+            title: 'Mail', image: Icon(Icons.mail, color: Colors.white)),
+        PopUpMenuItem(
+            title: 'Power', image: Icon(Icons.power, color: Colors.white)),
+        PopUpMenuItem(
             title: 'Setting', image: Icon(Icons.settings, color: Colors.white)),
-        MenuItem(
+        PopUpMenuItem(
             title: 'PopupMenu', image: Icon(Icons.menu, color: Colors.white))
       ],
       onClickMenu: onClickMenu,
       onDismiss: onDismiss,
     );
-    menu.show(widgetKey: btnKey3);
+    menu?.show(widgetKey: btnKey3);
   }
 
   void onGesturesDemo() {
@@ -137,11 +139,12 @@ class _MyHomePageState extends State<MyHomePage> {
       context: context,
       config: MenuConfig(maxColumn: 3),
       items: [
-        MenuItem(title: 'Copy', image: Image.asset('assets/copy.png')),
-        MenuItem(title: 'Power', image: Icon(Icons.power, color: Colors.white)),
-        MenuItem(
+        PopUpMenuItem(title: 'Copy', image: Image.asset('assets/copy.png')),
+        PopUpMenuItem(
+            title: 'Power', image: Icon(Icons.power, color: Colors.white)),
+        PopUpMenuItem(
             title: 'Setting', image: Icon(Icons.settings, color: Colors.white)),
-        MenuItem(
+        PopUpMenuItem(
             title: 'PopupMenu', image: Icon(Icons.menu, color: Colors.white))
       ],
       onClickMenu: onClickMenu,
@@ -159,15 +162,17 @@ class _MyHomePageState extends State<MyHomePage> {
           lineColor: Colors.tealAccent,
         ),
         items: [
-          MenuItem(title: 'Copy', image: Image.asset('assets/copy.png')),
-          MenuItem(title: 'Home', image: Icon(Icons.home, color: Colors.white)),
-          MenuItem(title: 'Mail', image: Icon(Icons.mail, color: Colors.white)),
-          MenuItem(
+          PopUpMenuItem(title: 'Copy', image: Image.asset('assets/copy.png')),
+          PopUpMenuItem(
+              title: 'Home', image: Icon(Icons.home, color: Colors.white)),
+          PopUpMenuItem(
+              title: 'Mail', image: Icon(Icons.mail, color: Colors.white)),
+          PopUpMenuItem(
               title: 'Power', image: Icon(Icons.power, color: Colors.white)),
-          MenuItem(
+          PopUpMenuItem(
               title: 'Setting',
               image: Icon(Icons.settings, color: Colors.white)),
-          MenuItem(
+          PopUpMenuItem(
               title: 'PopupMenu', image: Icon(Icons.menu, color: Colors.white))
         ],
         onClickMenu: onClickMenu,
@@ -180,21 +185,21 @@ class _MyHomePageState extends State<MyHomePage> {
         context: context,
         config: MenuConfig.forList(),
         items: [
-          // MenuItem.forList(
+          // PopUpMenuItem.forList(
           //     title: 'Copy', image: Image.asset('assets/copy.png')),
-          MenuItem.forList(
+          PopUpMenuItem.forList(
               title: 'Home',
               image: Icon(Icons.home, color: Color(0xFF181818), size: 20)),
-          MenuItem.forList(
+          PopUpMenuItem.forList(
               title: 'Mail',
               image: Icon(Icons.mail, color: Color(0xFF181818), size: 20)),
-          MenuItem.forList(
+          PopUpMenuItem.forList(
               title: 'Power',
               image: Icon(Icons.power, color: Color(0xFF181818), size: 20)),
-          MenuItem.forList(
+          PopUpMenuItem.forList(
               title: 'Setting',
               image: Icon(Icons.settings, color: Color(0xFF181818), size: 20)),
-          MenuItem.forList(
+          PopUpMenuItem.forList(
               title: 'PopupMenu',
               image: Icon(Icons.menu, color: Color(0xFF181818), size: 20))
         ],

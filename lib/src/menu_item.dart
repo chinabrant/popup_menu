@@ -9,14 +9,14 @@ abstract class MenuItemProvider {
 }
 
 /// Default menu item
-class MenuItem extends MenuItemProvider {
+class PopUpMenuItem extends MenuItemProvider {
   Widget? image;
   String title;
-  var userInfo; // 额外的菜单荐信息
+  var userInfo;
   TextStyle textStyle;
   TextAlign textAlign;
 
-  MenuItem({
+  PopUpMenuItem({
     this.title = "",
     this.image,
     this.userInfo,
@@ -27,7 +27,7 @@ class MenuItem extends MenuItemProvider {
     this.textAlign = TextAlign.center,
   });
 
-  factory MenuItem.forList({
+  factory PopUpMenuItem.forList({
     required String title,
     Widget? image,
     dynamic userInfo,
@@ -37,7 +37,7 @@ class MenuItem extends MenuItemProvider {
     ),
     TextAlign textAlign = TextAlign.center,
   }) {
-    return MenuItem(
+    return PopUpMenuItem(
       title: title,
       image: image,
       userInfo: userInfo,
