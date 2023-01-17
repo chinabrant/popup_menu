@@ -49,6 +49,11 @@ class _GestureDemoState extends State<GestureDemo> {
       // backgroundColor: Colors.teal,
       // lineColor: Colors.tealAccent,
       // maxColumn: 2,
+      config: MenuConfig(
+        backgroundColor: Colors.green,
+        lineColor: Colors.greenAccent,
+        highlightColor: Colors.lightGreenAccent,
+      ),
       items: [
         PopUpMenuItem(title: 'Copy', image: Image.asset('assets/copy.png')),
         PopUpMenuItem(

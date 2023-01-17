@@ -107,6 +107,11 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void onDismissOnlyBeCalledOnce() {
     menu = PopupMenu(
+      config: MenuConfig(
+        backgroundColor: Colors.green,
+        lineColor: Colors.greenAccent,
+        highlightColor: Colors.lightGreenAccent,
+      ),
       context: context,
       items: [
         // PopUpMenuItem(title: 'Copy', image: Image.asset('assets/copy.png')),
