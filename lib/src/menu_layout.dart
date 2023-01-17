@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:popup_menu/popup_menu.dart';
 
 abstract class MenuLayout {
   /// 菜单的宽度

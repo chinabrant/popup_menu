@@ -45,7 +45,7 @@ class PopupMenu {
   PopupMenu({
     required this.context,
     required this.items,
-    this.config = const MenuConfig(),
+    required this.config,
     this.onClickMenu,
     this.onDismiss,
     this.onShow,
