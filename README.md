@@ -2,9 +2,9 @@
 
 [![pub package](https://img.shields.io/badge/pub-v1.0.4-blue.svg)](https://pub.dev/packages/popup_menu)
 
-This project was writed with pure dart code，which means it's support both iOS and Android.
+This project was written completely in dart, and it supports both iOS and Android.
 
-# Screenshot
+# Screenshots
 <img src="https://wx2.sinaimg.cn/mw1024/acbce940gy1g6hsz8566vj20ek06waa9.jpg" width="20%"><img src="https://wx3.sinaimg.cn/mw1024/acbce940gy1g6hsz86ki9j209u0am74i.jpg" width="20%"><img src="https://wx2.sinaimg.cn/mw1024/acbce940gy1g6hsz8a1t2j20eg0ac74q.jpg" width="20%">
 
 <img src="04.png">
