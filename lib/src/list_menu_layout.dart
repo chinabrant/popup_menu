@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:popup_menu/src/menu_layout.dart';
 
-import 'menu_config.dart';
-import 'menu_item.dart';
 import 'popup_menu.dart';
 
 /// list menu layout
