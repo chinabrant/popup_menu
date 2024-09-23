@@ -59,6 +59,7 @@ class GridMenuLayout implements MenuLayout {
         decoration:
             BoxDecoration(border: Border(bottom: BorderSide(color: color))),
         height: config.itemHeight,
+        // width: config.itemWidth,
         child: Row(
           children: _createRowItems(i),
         ),
@@ -148,6 +149,8 @@ class GridMenuLayout implements MenuLayout {
       lineColor: config.lineColor,
       backgroundColor: config.backgroundColor,
       highlightColor: config.highlightColor,
+      itemWidth: config.itemWidth,
+      itemHeight: config.itemHeight,
     );
   }
 

@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
+  MyHomePage({required this.title});
 
   final String title;
 
@@ -25,11 +25,13 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  PopupMenu menu;
+  late PopupMenu menu;
   GlobalKey btnKey = GlobalKey();
   GlobalKey btnKey2 = GlobalKey();
   GlobalKey btnKey3 = GlobalKey();
   GlobalKey btnKey4 = GlobalKey();
+
+  GlobalKey customWidthKey = GlobalKey();
 
   @override
   void initState() {
@@ -90,6 +92,14 @@ class _MyHomePageState extends State<MyHomePage> {
                 height: 45.0,
                 onPressed: listMenu,
                 child: Text('List Menu'),
+              ),
+            ),
+            Container(
+              child: MaterialButton(
+                key: customWidthKey,
+                height: 45.0,
+                onPressed: customItemWidth,
+                child: Text('CustomItemWidth'),
               ),
             ),
             Container(
@@ -202,5 +212,26 @@ class _MyHomePageState extends State<MyHomePage> {
         onShow: onShow,
         onDismiss: onDismiss);
     menu.show(widgetKey: btnKey4);
+  }
+
+  void customItemWidth() {
+    PopupMenu menu = PopupMenu(
+      context: context,
+      config: MenuConfig(
+        maxColumn: 3,
+        itemWidth: 75,
+      ),
+      items: [
+        MenuItem(title: 'Copy', image: Image.asset('assets/copy.png')),
+        MenuItem(title: 'Power', image: Icon(Icons.power, color: Colors.white)),
+        MenuItem(
+            title: 'Setting', image: Icon(Icons.settings, color: Colors.white)),
+        MenuItem(
+            title: 'PopupMenu', image: Icon(Icons.menu, color: Colors.white))
+      ],
+      onClickMenu: onClickMenu,
+      onDismiss: onDismiss,
+    );
+    menu.show(widgetKey: customWidthKey);
   }
 }
