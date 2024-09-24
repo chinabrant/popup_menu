@@ -4,26 +4,23 @@ abstract class MenuItemProvider {
   String get menuTitle;
   dynamic get menuUserInfo;
   Widget? get menuImage;
-  TextStyle get menuTextStyle;
-  TextAlign get menuTextAlign;
+  TextStyle? get menuTextStyle;
+  TextAlign? get menuTextAlign;
 }
 
 /// Default menu item
 class MenuItem extends MenuItemProvider {
-  Widget? image;
-  String title;
+  final Widget? image;
+  final String title;
   var userInfo; // 额外的菜单荐信息
-  TextStyle textStyle;
-  TextAlign textAlign;
+  final TextStyle? textStyle;
+  final TextAlign? textAlign;
 
   MenuItem({
     this.title = "",
     this.image,
     this.userInfo,
-    this.textStyle = const TextStyle(
-      color: Color(0xffc5c5c5),
-      fontSize: 10.0,
-    ),
+    this.textStyle,
     this.textAlign = TextAlign.center,
   });
 
@@ -56,8 +53,8 @@ class MenuItem extends MenuItemProvider {
   dynamic get menuUserInfo => userInfo;
 
   @override
-  TextStyle get menuTextStyle => textStyle;
+  TextStyle? get menuTextStyle => textStyle;
 
   @override
-  TextAlign get menuTextAlign => textAlign;
+  TextAlign? get menuTextAlign => textAlign;
 }

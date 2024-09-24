@@ -15,17 +15,24 @@ class MenuConfig {
   /// 箭头的高度
   final double arrowHeight;
 
-  /// 格子类型菜单最大列数
+  /// Maximum number of columns for grid-type menu.
   final int maxColumn;
 
   /// 背景色
   final Color backgroundColor;
 
-  /// 点击的高亮色
+  /// The highlight color on click.
   final Color highlightColor;
 
-  /// 分隔线的颜色
+  /// The color of the separator line.
   final Color lineColor;
+
+  /// Uniformly setting the TextStyle for MenuItem will be overridden by MenuItem;
+  /// if MenuItem does not set it, then this Style will be used.
+  final TextStyle textStyle;
+
+  /// Text alignment, only effective in List Menu.
+  final TextAlign textAlign;
 
   const MenuConfig({
     this.type = MenuType.grid,
@@ -36,6 +43,11 @@ class MenuConfig {
     this.backgroundColor = const Color(0xff232323),
     this.highlightColor = const Color(0xff353535),
     this.lineColor = const Color(0x55000000),
+    this.textStyle = const TextStyle(
+      color: Color(0xffc5c5c5),
+      fontSize: 10.0,
+    ),
+    this.textAlign = TextAlign.center,
   });
 
   factory MenuConfig.forList({

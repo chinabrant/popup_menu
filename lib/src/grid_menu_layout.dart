@@ -143,14 +143,10 @@ class GridMenuLayout implements MenuLayout {
 
   Widget _createMenuItem(MenuItemProvider item, bool showLine) {
     return MenuItemWidget(
+      menuConfig: config,
       item: item,
       showLine: showLine,
       clickCallback: itemClicked,
-      lineColor: config.lineColor,
-      backgroundColor: config.backgroundColor,
-      highlightColor: config.highlightColor,
-      itemWidth: config.itemWidth,
-      itemHeight: config.itemHeight,
     );
   }
 

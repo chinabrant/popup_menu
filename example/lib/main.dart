@@ -75,7 +75,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 key: btnKey2,
                 height: 45.0,
                 onPressed: customBackground,
-                child: Text('Show Menu'),
+                child: Text('Custom Background'),
               ),
             ),
             Container(
@@ -165,20 +165,26 @@ class _MyHomePageState extends State<MyHomePage> {
     PopupMenu menu = PopupMenu(
         context: context,
         config: MenuConfig(
-          backgroundColor: Color(0xffc1e0f7),
-          lineColor: Colors.tealAccent,
+          backgroundColor: Colors.deepOrangeAccent,
+          lineColor: Colors.black26,
+          textStyle: TextStyle(color: Colors.black, fontSize: 10),
         ),
         items: [
-          MenuItem(title: 'Copy', image: Image.asset('assets/copy.png')),
-          MenuItem(title: 'Home', image: Icon(Icons.home, color: Colors.white)),
-          MenuItem(title: 'Mail', image: Icon(Icons.mail, color: Colors.white)),
           MenuItem(
-              title: 'Power', image: Icon(Icons.power, color: Colors.white)),
+              title: 'Copy',
+              image: Image.asset('assets/copy.png', color: Colors.black)),
+          MenuItem(title: 'Home', image: Icon(Icons.home, color: Colors.black)),
+          MenuItem(title: 'Mail', image: Icon(Icons.mail, color: Colors.black)),
+          MenuItem(
+              title: 'Power', image: Icon(Icons.power, color: Colors.black)),
           MenuItem(
               title: 'Setting',
-              image: Icon(Icons.settings, color: Colors.white)),
+              textStyle: TextStyle(color: Colors.red, fontSize: 10),
+              image: Icon(Icons.settings, color: Colors.black)),
           MenuItem(
-              title: 'PopupMenu', image: Icon(Icons.menu, color: Colors.white))
+              title: 'PopupMenu',
+              textStyle: TextStyle(color: Colors.blue, fontSize: 10),
+              image: Icon(Icons.menu, color: Colors.black))
         ],
         onClickMenu: onClickMenu,
         onDismiss: onDismiss);
@@ -219,7 +225,7 @@ class _MyHomePageState extends State<MyHomePage> {
       context: context,
       config: MenuConfig(
         maxColumn: 3,
-        itemWidth: 75,
+        itemWidth: 100,
       ),
       items: [
         MenuItem(title: 'Copy', image: Image.asset('assets/copy.png')),

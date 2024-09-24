@@ -60,7 +60,7 @@ class ListMenuLayout implements MenuLayout {
                                 item.menuTitle,
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
-                                style: item.menuTextStyle,
+                                style: item.menuTextStyle ?? config.textStyle,
                                 textAlign: item.menuTextAlign,
                               ),
                             )

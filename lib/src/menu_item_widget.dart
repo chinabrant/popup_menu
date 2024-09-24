@@ -5,25 +5,17 @@ import 'menu_item.dart';
 
 class MenuItemWidget extends StatefulWidget {
   final MenuItemProvider item;
+  final MenuConfig menuConfig;
   // 是否要显示右边的分隔线
   final bool showLine;
-  final Color lineColor;
-  final Color backgroundColor;
-  final Color highlightColor;
-  final double itemWidth;
-  final double itemHeight;
 
   final Function(MenuItemProvider item)? clickCallback;
 
   MenuItemWidget({
-    this.itemWidth = 72.0,
-    this.itemHeight = 65.0,
+    required this.menuConfig,
     required this.item,
     this.showLine = false,
     this.clickCallback,
-    required this.lineColor,
-    required this.backgroundColor,
-    required this.highlightColor,
   });
 
   @override
@@ -38,8 +30,8 @@ class _MenuItemWidgetState extends State<MenuItemWidget> {
 
   @override
   void initState() {
-    color = widget.backgroundColor;
-    highlightColor = widget.highlightColor;
+    color = widget.menuConfig.backgroundColor;
+    highlightColor = widget.menuConfig.highlightColor;
     super.initState();
   }
 
@@ -51,11 +43,11 @@ class _MenuItemWidgetState extends State<MenuItemWidget> {
         setState(() {});
       },
       onTapUp: (details) {
-        color = widget.backgroundColor;
+        color = widget.menuConfig.backgroundColor;
         setState(() {});
       },
       onLongPressEnd: (details) {
-        color = widget.backgroundColor;
+        color = widget.menuConfig.backgroundColor;
         setState(() {});
       },
       onTap: () {
@@ -64,14 +56,14 @@ class _MenuItemWidgetState extends State<MenuItemWidget> {
         }
       },
       child: Container(
-          width: widget.itemWidth,
-          height: widget.itemHeight,
+          width: widget.menuConfig.itemWidth,
+          height: widget.menuConfig.itemHeight,
           decoration: BoxDecoration(
               color: color,
               border: Border(
                   right: BorderSide(
                       color: widget.showLine
-                          ? widget.lineColor
+                          ? widget.menuConfig.lineColor
                           : Colors.transparent))),
           child: _createContent()),
     );
@@ -94,7 +86,7 @@ class _MenuItemWidgetState extends State<MenuItemWidget> {
               color: Colors.transparent,
               child: Text(
                 widget.item.menuTitle,
-                style: widget.item.menuTextStyle,
+                style: widget.item.menuTextStyle ?? widget.menuConfig.textStyle,
               ),
             ),
           )
@@ -108,8 +100,9 @@ class _MenuItemWidgetState extends State<MenuItemWidget> {
             color: Colors.transparent,
             child: Text(
               widget.item.menuTitle,
-              style: widget.item.menuTextStyle,
-              textAlign: widget.item.menuTextAlign,
+              style: widget.item.menuTextStyle ?? widget.menuConfig.textStyle,
+              textAlign:
+                  widget.item.menuTextAlign ?? widget.menuConfig.textAlign,
             ),
           ),
         ),
