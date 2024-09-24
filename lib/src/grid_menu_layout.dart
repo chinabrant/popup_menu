@@ -31,9 +31,6 @@ class GridMenuLayout implements MenuLayout {
   /// col count
   int _col = 1;
 
-  /// The max column count, default is 4.
-  int _maxColumn = 4;
-
   /// calculate the menu row and col count
   void _calculateRowAndCol() {
     _col = _calculateColCount();
@@ -47,6 +44,10 @@ class GridMenuLayout implements MenuLayout {
   // This height exclude the arrow
   double menuHeight() {
     return config.itemHeight * _row;
+  }
+
+  int menuMaxColumn() {
+    return config.maxColumn;
   }
 
   // 创建行
@@ -111,8 +112,8 @@ class GridMenuLayout implements MenuLayout {
     assert(items.length > 0, 'error: menu items can not be null');
 
     int itemCount = items.length;
-    if (_maxColumn != 4 && _maxColumn > 0) {
-      return _maxColumn;
+    if (menuMaxColumn() != 4 && menuMaxColumn() > 0) {
+      return menuMaxColumn();
     }
 
     if (itemCount == 4) {
@@ -120,7 +121,7 @@ class GridMenuLayout implements MenuLayout {
       return 2;
     }
 
-    if (itemCount <= _maxColumn) {
+    if (itemCount <= menuMaxColumn()) {
       return itemCount;
     }
 
@@ -132,7 +133,7 @@ class GridMenuLayout implements MenuLayout {
       return 3;
     }
 
-    return _maxColumn;
+    return menuMaxColumn();
   }
 
   double get screenWidth {
